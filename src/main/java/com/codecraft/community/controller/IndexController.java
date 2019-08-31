@@ -31,11 +31,10 @@ import org.springframework.web.bind.annotation.RequestParam;
  * ━━━━━━感觉萌萌哒━━━━━━
  */
 @Controller
-public class HelloController {
+public class IndexController {
 
-    @GetMapping("/hello")
-    public String hello(@RequestParam(name = "name") String name, Model model) {
-        model.addAttribute("name", name);
-        return "hello";
+    @GetMapping("/")
+    public String hello() {
+        return "index";
     }
 }
