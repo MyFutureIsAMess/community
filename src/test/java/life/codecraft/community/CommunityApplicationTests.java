@@ -1,4 +1,4 @@
-package com.codecraft.community;
+package life.codecraft.community;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

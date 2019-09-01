@@ -1,4 +1,4 @@
-package com.codecraft.community.controller;
+package life.codecraft.community.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
