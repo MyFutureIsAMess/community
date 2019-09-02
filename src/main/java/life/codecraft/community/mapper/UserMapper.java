@@ -1,9 +1,13 @@
-package life.codecraft.community.dto;
+package life.codecraft.community.mapper;
+
+import life.codecraft.community.model.User;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * @author Guojian Wang
  * @version 1.0
- * @date 2019/9/1 - 2:23
+ * @date 2019/9/2 - 16:09
  * @since 1.0
  * ━━━━━━神兽出没━━━━━━
  * 　　　┏┓　　　┏┓
@@ -25,41 +29,9 @@ package life.codecraft.community.dto;
  * 　　　　　┗┻┛　┗┻┛
  * ━━━━━━感觉萌萌哒━━━━━━
  */
-public class GithubUser {
-    private String name;
-    private Long id;
-    private String bio;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getBio() {
-        return bio;
-    }
-
-    public void setBio(String bio) {
-        this.bio = bio;
-    }
-
-    @Override
-    public String toString() {
-        return "GithubUser{" +
-                "name='" + name + '\'' +
-                ", id=" + id +
-                ", bio='" + bio + '\'' +
-                '}';
-    }
+@Mapper
+public interface UserMapper {
+    @Insert("insert into user (name,account_id,token,gmt_create,gmt_modified) " +
+            "values (#{name},#{accountId},#{token},#{gmtCreate},#{gmtModified})")
+    void insert(User user);
 }

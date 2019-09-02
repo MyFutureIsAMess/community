@@ -1,9 +1,9 @@
-package life.codecraft.community.dto;
+package life.codecraft.community.model;
 
 /**
  * @author Guojian Wang
  * @version 1.0
- * @date 2019/9/1 - 2:23
+ * @date 2019/9/2 - 16:21
  * @since 1.0
  * ━━━━━━神兽出没━━━━━━
  * 　　　┏┓　　　┏┓
@@ -25,10 +25,21 @@ package life.codecraft.community.dto;
  * 　　　　　┗┻┛　┗┻┛
  * ━━━━━━感觉萌萌哒━━━━━━
  */
-public class GithubUser {
+public class User {
+    private Integer id;
     private String name;
-    private Long id;
-    private String bio;
+    private String accountId;
+    private String token;
+    private Long gmtCreate;
+    private Long gmtModified;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -38,28 +49,35 @@ public class GithubUser {
         this.name = name;
     }
 
-    public Long getId() {
-        return id;
+    public String getAccountId() {
+        return accountId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
     }
 
-    public String getBio() {
-        return bio;
+    public String getToken() {
+        return token;
     }
 
-    public void setBio(String bio) {
-        this.bio = bio;
+    public void setToken(String token) {
+        this.token = token;
     }
 
-    @Override
-    public String toString() {
-        return "GithubUser{" +
-                "name='" + name + '\'' +
-                ", id=" + id +
-                ", bio='" + bio + '\'' +
-                '}';
+    public Long getGmtCreate() {
+        return gmtCreate;
+    }
+
+    public void setGmtCreate(Long gmtCreate) {
+        this.gmtCreate = gmtCreate;
+    }
+
+    public Long getGmtModified() {
+        return gmtModified;
+    }
+
+    public void setGmtModified(Long gmtModified) {
+        this.gmtModified = gmtModified;
     }
 }
