@@ -1,11 +1,12 @@
 package life.codecraft.community.dto;
 
+import life.codecraft.community.model.User;
 import lombok.Data;
 
 /**
  * @author Guojian Wang
  * @version 1.0
- * @date 2019/9/1 - 2:23
+ * @date 2019/9/10 - 0:40
  * @since 1.0
  * ━━━━━━神兽出没━━━━━━
  * 　　　┏┓　　　┏┓
@@ -28,9 +29,14 @@ import lombok.Data;
  * ━━━━━━感觉萌萌哒━━━━━━
  */
 @Data
-public class GithubUser {
-    private String name;
+public class CommentDTO {
     private Long id;
-    private String bio;
-    private String avatarUrl;
+    private Long parentId;
+    private Integer type;
+    private Long commentator;
+    private Long gmtCreate;
+    private Long gmtModified;
+    private Long likeCount;
+    private String content;
+    private User user;
 }

@@ -1,11 +1,9 @@
-package life.codecraft.community.dto;
-
-import lombok.Data;
+package life.codecraft.community.exception;
 
 /**
  * @author Guojian Wang
  * @version 1.0
- * @date 2019/9/1 - 2:23
+ * @date 2019/9/7 - 16:37
  * @since 1.0
  * ━━━━━━神兽出没━━━━━━
  * 　　　┏┓　　　┏┓
@@ -27,10 +25,8 @@ import lombok.Data;
  * 　　　　　┗┻┛　┗┻┛
  * ━━━━━━感觉萌萌哒━━━━━━
  */
-@Data
-public class GithubUser {
-    private String name;
-    private Long id;
-    private String bio;
-    private String avatarUrl;
+public interface ICustomizeErrorCode {
+    String getMessage();
+
+    Integer getCode();
 }

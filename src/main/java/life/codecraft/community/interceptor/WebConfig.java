@@ -1,11 +1,14 @@
-package life.codecraft.community.dto;
+package life.codecraft.community.interceptor;
 
-import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * @author Guojian Wang
  * @version 1.0
- * @date 2019/9/1 - 2:23
+ * @date 2019/9/6 - 14:40
  * @since 1.0
  * ━━━━━━神兽出没━━━━━━
  * 　　　┏┓　　　┏┓
@@ -27,10 +30,15 @@ import lombok.Data;
  * 　　　　　┗┻┛　┗┻┛
  * ━━━━━━感觉萌萌哒━━━━━━
  */
-@Data
-public class GithubUser {
-    private String name;
-    private Long id;
-    private String bio;
-    private String avatarUrl;
+@Configuration
+//@EnableWebMvc
+public class WebConfig implements WebMvcConfigurer {
+
+    @Autowired
+    private SessionInterceptor sessionInterceptor;
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(sessionInterceptor).addPathPatterns("/**");
+    }
 }

@@ -1,17 +1,24 @@
 package life.codecraft.community.controller;
 
-import life.codecraft.community.dto.PaginationDTO;
+import life.codecraft.community.dto.CommentDTO;
+import life.codecraft.community.dto.QuestionDTO;
+import life.codecraft.community.enums.CommentTypeEnum;
+import life.codecraft.community.service.CommentService;
 import life.codecraft.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.List;
+
+;
 
 /**
  * @author Guojian Wang
  * @version 1.0
- * @date 2019/8/31 - 20:51
+ * @date 2019/9/6 - 15:35
  * @since 1.0
  * ━━━━━━神兽出没━━━━━━
  * 　　　┏┓　　　┏┓
@@ -34,17 +41,23 @@ import org.springframework.web.bind.annotation.RequestParam;
  * ━━━━━━感觉萌萌哒━━━━━━
  */
 @Controller
-public class IndexController {
+public class QuestionController {
 
     @Autowired
     private QuestionService questionService;
 
-    @GetMapping("/")
-    public String hello(Model model,
-                        @RequestParam(name = "page", defaultValue = "1") Integer page,
-                        @RequestParam(name = "size", defaultValue = "5") Integer size) {
-        PaginationDTO pagination = questionService.list(page, size);
-        model.addAttribute("pagination", pagination);
-        return "index";
+    @Autowired
+    private CommentService commentService;
+
+    @GetMapping("/question/{id}")
+    public String question(@PathVariable(name = "id") Long id, Model model) {
+        QuestionDTO questionDTO = questionService.getById(id);
+
+        List<CommentDTO> commnents = commentService.listByTargetId(id, CommentTypeEnum.QUESTION);
+        // 累加阅读数
+        questionService.incView(id);
+        model.addAttribute("question", questionDTO);
+        model.addAttribute("comments", commnents);
+        return "question";
     }
 }
