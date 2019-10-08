@@ -1,5 +1,21 @@
 ## codeCraft社区
 
+## 部署
+### 依赖
+- Git
+- JDK
+- Maven
+- MySQL
+## 步骤
+- yum update
+- yum install git
+- mkdir App
+- cd App
+- git clone https://github.com/codedrinker/community.git
+- yum install maven
+- mvn -v
+- mvn compile package
+
 ## 资料
 [spring 文档](https://spring.io/guides)  
 [spring Web](https://spring.io/guides/gs/serving-web-content/)  
