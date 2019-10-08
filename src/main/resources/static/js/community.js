@@ -63,31 +63,73 @@ function collapseComments(e) {
         e.removeAttribute("data-collapse");
         e.classList.remove("active");
     } else {
-        $.getJSON("/comment/" + id, function (data) {
-            console.log(data);
-            var commentBody = $("comment-body-" + id);
-            var items = [];
+        var subCommentContainer = $("#comment-" + id);
 
-            var  c = $.each(data.data, function (comment) {
-                $("<div/>", {
-                    "class": "col-lg-12 col-md-12 col-sm-12 col-xs-12 comments",
-                    html: comment.content
-                });
-                items.push(c);
-            });
-
-            commentBody.append($("<div/>", {
-                "class": "col-lg-12 col-md-12 col-sm-12 col-xs-12 collapse sub-comments",
-                "id": "comment-" + id,
-                html: items.join("")
-            }));
-
+        if (subCommentContainer.children().length != 1) {
             // 展开二级评论
             comments.addClass("in");
             // 标记二级评论状态
             e.setAttribute("data-collapse", "in");
             e.classList.add("active");
-        });
-    }
+        } else {
+            $.getJSON("/comment/" + id, function (data) {
+                $.each(data.data.reverse(), function (index, comment) {
+                    var mediaLeftElement = $("<div/>", {
+                        "class": "media-left"
+                    }).append($("<img/>", {
+                        "class": "media-object img-rounded",
+                        "src": comment.user.avatarUrl
+                    }));
 
+                    var mediaBodyElement = $("<div/>", {
+                        "class": "media-body"
+                    }).append($("<h5/>", {
+                        "class": "media-heading",
+                        "html": comment.user.name
+                    })).append($("<div/>", {
+                        "html": comment.content
+                    })).append($("<div/>", {
+                        "class": "menu"
+                    }).append($("<span/>", {
+                        "class": "pull-right",
+                        "html": moment(comment.gmtCreate).format('YYYY-MM-DD')
+                    })));
+
+                    var mediaElement = $("<div/>", {
+                        "class": "media"
+                    }).append(mediaLeftElement).append(mediaBodyElement);
+
+                    var commentElement = $("<div/>", {
+                        "class": "col-lg-12 col-md-12 col-sm-12 col-xs-12 comments"
+                    }).append(mediaElement);
+                    subCommentContainer.prepend(commentElement);
+                });
+                // 展开二级评论
+                comments.addClass("in");
+                // 标记二级评论状态
+                e.setAttribute("data-collapse", "in");
+                e.classList.add("active");
+            });
+
+        }
+    }
+}
+
+function showSelectTag() {
+    $("#select-tag").show();
+}
+
+function selectTag(e) {
+    var value = e.getAttribute("data-tag");
+    var previous = $("#tag").val();
+
+    if (previous.indexOf(value) != -1) {
+
+    } else {
+        if (previous) {
+            $("#tag").val(previous + ',' + value);
+        } else {
+            $("#tag").val(value);
+        }
+    }
 }
