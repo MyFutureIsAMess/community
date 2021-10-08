@@ -11,7 +11,7 @@
 - yum install git
 - mkdir App
 - cd App
-- git clone https://github.com/codedrinker/community.git
+- git clone
 - yum install maven
 - mvn -v
 - mvn compile package
